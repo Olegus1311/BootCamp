@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "54970fc8-c7c9-488d-8748-7e2d35919998",
+		"name": "Wallet API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create wallet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e34ee3d3-0806-45cf-b0dd-157a2586c0a1",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response contains wallet_id\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.have.property('wallet_id');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.bitaps.com/btc/testnet/v1/create/wallet",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bitaps",
+						"com"
+					],
+					"path": [
+						"btc",
+						"testnet",
+						"v1",
+						"create",
+						"wallet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment address",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"wallet_id\":\"BTCvrZx6AGWavwmgDEdU9CU8Li8twHAT1r96NL97rrT29MQg1qoye\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.bitaps.com/btc/testnet/v1/create/wallet/payment/address",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bitaps",
+						"com"
+					],
+					"path": [
+						"btc",
+						"testnet",
+						"v1",
+						"create",
+						"wallet",
+						"payment",
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get wallet state",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"wallet_id\":\"BTCvrZx6AGWavwmgDEdU9CU8Li8twHAT1r96NL97rrT29MQg1qoye\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.bitaps.com/btc/testnet/v1//wallet/state/BTCvrZx6AGWavwmgDEdU9CU8Li8twHAT1r96NL97rrT29MQg1qoye",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bitaps",
+						"com"
+					],
+					"path": [
+						"btc",
+						"testnet",
+						"v1",
+						"",
+						"wallet",
+						"state",
+						"BTCvrZx6AGWavwmgDEdU9CU8Li8twHAT1r96NL97rrT29MQg1qoye"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Variable",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addresses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statistic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

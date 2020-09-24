@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "testb": "jest Bit1.test.js"
+    "testb": "jest Bit1.test.js",
+    "testc": "jest iframe.test.js"
   },
   "keywords": [],
   "author": "",

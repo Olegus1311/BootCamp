@@ -1,10 +1,12 @@
-jest.setTimeout(30000000);
 const {chromium} = require('playwright');
-const url = 'https://the-internet.herokuapp.com/';
+
+jest.setTimeout(30000000);
 
 let browser;
 
-
+afterAll(async () => {
+    await browser.close()
+})
 
 describe('UI', ()=>{
     let page;
@@ -12,34 +14,22 @@ describe('UI', ()=>{
         browser = await chromium.launch({headless:false, slowMo: 1000});
         const context = await browser.newContext();
         page = await context.newPage();
-        await page.goto('https://the-internet.herokuapp.com/frames');
-    });
-
-    test('Go to iframe page', async () => {
-        await page.click('[href="/iframe"]');
-    });
-
-    test('Click on "p" button to select text', async () => {
-        let temp;
-        for(let frame of await page.frames()) {
-            temp = await frame.$('[id=mceu_29-0]');
-            if(temp)
-            {
-                console.log('button ok');
-                break;
-            }
-        }    
-        await temp.click();
+        await page.goto('https://www.w3schools.com/html/html_iframe.asp', {
+            networkIdleTimeout: 5000,
+            waitUntil: 'networkidle',
+            timeout: 3000000
+        });
     });
 
     test('Write text to iframe', async () => {
-        const handle = await page.$('[id=mce_0_ifr]');
+        const handle = await page.$("[src='default.asp']");
         const contentFrame = await handle.contentFrame();
-        if(contentFrame)
-        {
-            contentFrame.textContent = 'Hello world';
-            expect(contentFrame.textContent).toBe("Hello world");
-            console.log('textarea ok');
+
+        if(contentFrame) {
+            await contentFrame.click('[href="/css/default.asp"]')
+            await contentFrame.click('[onclick="open_search(this)"]')
+            await contentFrame.fill('input[class="gsc-input"]', 'hello')
+            await contentFrame.click('[class="gsc-search-button"]')
         }
     });
     
